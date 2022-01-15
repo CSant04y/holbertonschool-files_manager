@@ -6,6 +6,7 @@ const port = process.env.DB_PORT || 27017;
 const database = process.env.DB_DATABASE || 'files_manager';
 const url = `mongodb://${host}:${port}`;
 
+console.log(database);
 class DBClient {
   constructor() {
     console.log('before construction');
@@ -16,7 +17,7 @@ class DBClient {
         this.db = client.db(database);
         this.users = this.db.collection('users');
         this.files = this.db.collection('files');
-        this.db = true;
+        // this.db = true;
         console.log('Client was true');
       }
       if (err) {
@@ -29,18 +30,20 @@ class DBClient {
   isAlive() {
     // console.log(this.db);
     if (!this.db) {
-      return false;
+      return !!this.db;
     }
-    return true;
+    return !!this.db;
   }
 
-  // async nbUsers() {
-  //   ;
-  // }
+  async nbUsers() {
+    const num = await this.users.countDocuments();
+    return num;
+  }
 
-  // async nbFiles() {
-  //   ;
-  // }
+  async nbFiles() {
+    const num = await this.files.countDocuments();
+    return num;
+  }
 }
 
 const dbClient = new DBClient();
