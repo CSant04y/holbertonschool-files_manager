@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
 
 // Grabing env variables or defaulting to right
 const host = process.env.DB_HOST || 'localhost';
@@ -11,7 +11,7 @@ class DBClient {
   constructor() {
     console.log('before construction');
 
-    this.DB = new MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+    this.dB = new MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
       console.log('Before');
       if (client) {
         this.db = client.db(database);

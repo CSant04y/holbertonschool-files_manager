@@ -20,6 +20,5 @@ module.exports = (app) => {
     console.log('test3');
     console.log(res.status);
     UsersController.postNew(req, res);
-
   });
 }
