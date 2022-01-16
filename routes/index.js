@@ -1,11 +1,12 @@
 const express = require('express');
 import AppController from '../controllers/AppController';
 import UsersController from '../controllers/UsersController';
+import AuthController from '../controllers/AuthController';
 
 module.exports = (app) => {
   const router = express.Router();
   app.use('/', router);
-  console.log('Hi Im here');
+
   router.get('/status', (req, res) => {
     console.log('test1');
     AppController.getStatus(req, res);
@@ -18,7 +19,21 @@ module.exports = (app) => {
 
   router.post('/users', (req, res) => {
     console.log('test3');
-    console.log(res.status);
     UsersController.postNew(req, res);
   });
+
+  router.get('/connect', (req, res) => {
+    console.log('test4');
+    AuthController.getConnect(req, res);
+  });
+
+  router.get('disconnect', (req, res) => {
+    console.log('test5');
+    AuthController.getDisconnect(req, res);
+  });
+
+  router.get('/users/me', (req, res) => {
+    console.log('test6');
+    UsersController.getMe(req, res);
+  })
 }
