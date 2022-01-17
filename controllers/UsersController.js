@@ -22,8 +22,8 @@ class UsersController {
       if (err) console.log(err);
     });
     const sameValue = await dbClient.users.findOne({ email });
-    const sameUser = { _id: sameValue._id, email };
-    console.log(sameUser);
+    const sameUser = { id: sameValue._id, email };
+    console.log('this is sameUser:', sameUser);
 
     return res.status(201).send(sameUser);
   }
