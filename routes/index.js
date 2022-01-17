@@ -28,7 +28,7 @@ module.exports = (app) => {
     AuthController.getConnect(req, res);
   });
 
-  router.get('disconnect', (req, res) => {
+  router.get('/disconnect', (req, res) => {
     console.log('test5');
     AuthController.getDisconnect(req, res);
   });
