@@ -11,11 +11,13 @@ class AppController {
     }
   }
 
-  static getStats(req, res) {
-    const numUsers = dbClient.nbUsers();
-    const numFiles = dbClient.nbFiles();
-    res.status(200);
-    return res.send({ users: numUsers, files: numFiles });
+  static async getStats(req, res) {
+    const numUsers = await dbClient.nbUsers();
+    //console.log(numUsers);
+    const numFiles = await dbClient.nbFiles();
+    //console.log(numFiles);
+    //res.status(200);
+    res.status(200).send({ users: numUsers, files: numFiles });
   }
 }
 
