@@ -11,7 +11,7 @@ class DBClient {
   constructor() {
     console.log('before construction');
 
-    this.dB = new MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+    MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
       console.log('Before');
       if (client) {
         this.db = client.db(database);
