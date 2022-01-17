@@ -1,7 +1,8 @@
-const express = require('express');
 import AppController from '../controllers/AppController';
 import UsersController from '../controllers/UsersController';
 import AuthController from '../controllers/AuthController';
+
+const express = require('express');
 
 module.exports = (app) => {
   const router = express.Router();
@@ -35,5 +36,5 @@ module.exports = (app) => {
   router.get('/users/me', (req, res) => {
     console.log('test6');
     UsersController.getMe(req, res);
-  })
-}
+  });
+};
