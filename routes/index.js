@@ -1,6 +1,7 @@
 import AppController from '../controllers/AppController';
 import UsersController from '../controllers/UsersController';
 import AuthController from '../controllers/AuthController';
+import FilesController from '../controllers/FilesController';
 
 const express = require('express');
 
@@ -36,5 +37,10 @@ module.exports = (app) => {
   router.get('/users/me', (req, res) => {
     console.log('test6');
     UsersController.getMe(req, res);
+  });
+
+  router.post('/files', (req, res) => {
+    console.log('test7');
+    FilesController.postUpload(req, res);
   });
 };
