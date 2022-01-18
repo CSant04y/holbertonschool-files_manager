@@ -40,4 +40,4 @@ class AuthController {
 }
 
 export default AuthController;
-// curl 0.0.0.0:5000/users/me -H "X-Token: 76b7f030-f792-4024-9a59-70431fccee77" ; echo ""
+// curl 0.0.0.0:5000/users/me -H "X-Token: 565073bb-3e53-4fc1-80ba-34e341cecd5b" ; echo ""
