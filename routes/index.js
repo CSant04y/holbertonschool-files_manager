@@ -30,17 +30,27 @@ module.exports = (app) => {
   });
 
   router.get('/disconnect', (req, res) => {
-    console.log('test5');
+    console.log('disconnect');
     AuthController.getDisconnect(req, res);
   });
 
   router.get('/users/me', (req, res) => {
-    console.log('test6');
+    console.log('users and me');
     UsersController.getMe(req, res);
   });
 
   router.post('/files', (req, res) => {
-    console.log('test7');
+    console.log('get files');
     FilesController.postUpload(req, res);
+  });
+
+  router.get('/files/:id', (req, res) => {
+    console.log('Get files with Id');
+    FilesController.getShow(req, res);
+  });
+
+  router.get('/files', (req, res) => {
+    console.log('get files pagination');
+    FilesController.getIndex(req, res);
   });
 };

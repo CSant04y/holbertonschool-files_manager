@@ -93,6 +93,47 @@ class FilesController {
       parentId: obj2.parentId,
     });
   }
+
+  static async getShow(req, res) {
+    console.log('Before getUser: ');
+    const user = await getUser(req);
+    console.log(user._id);
+    if (!user) return res.status(401).send({ error: 'Not found' });
+    const parentId = req.params.id;
+    console.log('');
+    const file = await dbClient.files.findOne({ parentId, userId: user.id });
+    console.log('\tThis is file: ', file);
+    return file;
+  }
+
+  static async getIndex(req, res) {
+
+    const user = await getUser(req);
+    if (!user) return res.status(401).send({ error: 'Unauthorized' });
+
+    console.log('This is user: ', user);
+
+    let parentId = req.query.parentId || 0;
+    console.log('This is parent Id: ', parentId);
+    if (typeof parentId === 'string') parentId = +parentId;
+    // parentId = ObjectId(parentId);
+    console.log('This is parent Id: ', parentId);
+    if (parentId !== 0) {
+      const folder = await dbClient.files.findOne({ parentId });
+
+      console.log('This is type of Aggregate: ', typeof folder);
+      console.log(folder);
+      if (!folder || folder.type !== 'folder') return [];
+    }
+    const page = req.query.page || 0;
+    console.log('This is page:', page);
+    const agg = { $and: [{ parentId }] };
+    const pipeLine = [{ $match: agg }, { $skip: page * 20 }, { $limit: 20 }];
+
+    const pagesFiles = await dbClient.files.aggregate(pipeLine);
+
+    console.log(pagesFiles);
+  }
 }
 
 export default FilesController;
