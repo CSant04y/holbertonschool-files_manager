@@ -1,8 +1,7 @@
-const sha1 = require('sha1');
-const { ObjectId } = require('mongodb');
-const dbClient = require('../utils/db');
-const redisClient = require('../utils/redis');
 import getUser from '../utils/getUser';
+
+const sha1 = require('sha1');
+const dbClient = require('../utils/db');
 
 class UsersController {
   static async postNew(req, res) {
@@ -27,6 +26,7 @@ class UsersController {
 
   static async getMe(req, res) {
     const value = await getUser(req, res);
+    if (!value) return res.status(401).send({ error: 'Unauthorized' });
     console.log('This is the new value in getMe: ', value);
     return res.send({ id: value._id, email: value.email });
   }
