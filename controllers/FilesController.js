@@ -107,7 +107,6 @@ class FilesController {
   }
 
   static async getIndex(req, res) {
-
     const user = await getUser(req);
     if (!user) return res.status(401).send({ error: 'Unauthorized' });
 
@@ -133,6 +132,7 @@ class FilesController {
     const pagesFiles = await dbClient.files.aggregate(pipeLine);
 
     console.log(pagesFiles);
+    return null;
   }
 }
 
