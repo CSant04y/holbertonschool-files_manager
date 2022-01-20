@@ -27,6 +27,7 @@ class UsersController {
 
   static async getMe(req, res) {
     const value = await getUser(req, res);
+    console.log('This is the new value in getMe: ', value);
     return res.send({ id: value._id, email: value.email });
   }
 }

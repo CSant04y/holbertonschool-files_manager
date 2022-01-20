@@ -17,10 +17,12 @@ class AuthController {
     const [email, password] = decodedStr.split(':');
 
     if (!email || !password) return res.status(401).send({ error: 'Unauthorized' });
+    console.log('This is email + pass that wa returned: ', email, password);
 
     const hash = sha1(password);
 
     const value = await dbClient.users.findOne({ email, password: hash });
+    console.log('This is value that wa returned: ', value);
 
     if (!value) return res.status(401).send({ error: 'Unauthorized' });
     const token = uuidv4();

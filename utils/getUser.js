@@ -2,15 +2,24 @@ const { ObjectId } = require('mongodb');
 const dbClient = require('./db');
 const redisClient = require('./redis');
 
-async function getUser(req, res) {
+async function getUser(req) {
   const token = req.header('X-token');
-
-  if (!token) return res.status(401).send({ error: 'Unauthorized' });
+  console.log('This is token: ', token);
+  if (!token) {
+    return null;
+  }
   const user = await redisClient.get(`auth_${token}`);
 
-  const value = await dbClient.users.findOne({ _id: ObjectId(user) });
+  if (!user) {
+    return null;
+  }
 
-  if (!value) return res.status(401).send({ error: 'Unauthorized' });
+  const value = await dbClient.users.findOne({ _id: ObjectId(user) });
+  console.log('This is value: ', value);
+
+  if (!value) {
+    return null;
+  }
 
   return (value);
 }

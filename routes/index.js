@@ -10,22 +10,22 @@ module.exports = (app) => {
   app.use('/', router);
 
   router.get('/status', (req, res) => {
-    console.log('test1');
+    console.log('status');
     AppController.getStatus(req, res);
   });
 
   router.get('/stats', (req, res) => {
-    console.log('test2');
+    console.log('stats');
     AppController.getStats(req, res);
   });
 
   router.post('/users', (req, res) => {
-    console.log('test3');
+    console.log('users');
     UsersController.postNew(req, res);
   });
 
   router.get('/connect', (req, res) => {
-    console.log('test4');
+    console.log('connect');
     AuthController.getConnect(req, res);
   });
 
